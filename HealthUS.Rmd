@@ -1,0 +1,146 @@
+---
+title: "Health-related Data in the U.S."
+output: html_notebook
+author: Ada Ye
+---
+
+This notebook gives an overview of demogrpahic, socioeconomic and health-related datasets that might help with the research on COVID-19 in the U.S. 
+
+```{r}
+library(tidyverse)
+```
+
+### U.S. Department of Health and Human Services
+The following demonstrated datasets are from U.S. Department of Health and Human Services. 
+
+#### medicare
+medicare (https://data.medicare.gov), which documents the general information on health facilities across the United States, is part of the dataset on the Medicare.gov Hospital Compare Website provided by the Centers for Medicare & Medicaid Services to compare the quality of care at over 4000 medicare-certified hospitals across the country. More data packages on medicare and hospitals in the U.S. are available in the same folder. This is updated on 4/22/2020. 
+
+```{r}
+medicare <- read.csv("data/Department of Health and Human Services/Hospital_Revised_Flatfiles/Hospital General Information.csv")
+medicare
+```
+```{r}
+glimpse(medicare)
+```
+
+#### medicareDisparityPop
+medicareDisparityPop, if mapped as demonstrated in the link (https://data.cms.gov/mapping-medicare-disparities), can be used to 
+1) visualize health outcome measures at a national, state, or county level; 
+2) explore health outcome measures by age, race and ethnicity, sex; 
+3) compare differences between two geographic locations (e.g., benchmark against the national average); and 
+4) compare differences between two racial and ethnic groups within the same geographic area. 
+
+This is a population view, last updated on 6/17/2019. Hospital-wise mapped comparisons are available here: https://data.cms.gov/mapping-medicare-disparities/hospital-view. Information that is used to make this map can be extracted from the "Hospital_Revised_Flatfiles" folder. 
+
+```{r}
+medicareDisparityPop <- read.csv("data/Department of Health and Human Services/mmd_data.csv")
+medicareDisparityPop
+```
+
+```{r}
+glimpse(medicareDisparityPop)
+```
+
+#### geography
+A helpful csv on American geographies and demographies (https://data.cms.gov/mapping-medicare-disparities) that is also used to generate the map in the link. 
+
+```{r}
+geography <- read.csv("data/Department of Health and Human Services/ACS_Profile_Data_20180801.csv")
+geography
+```
+
+```{r}
+glimpse(geography)
+```
+
+#### careState
+Updated on 8/22/2018, careState provides medical care program names, program features, population enrolled, benefits covered, quality assurance and improvement, performance incentives, provider value-based purchasing, participating plans, regions served and program notes (https://data.medicaid.gov/Enrollment/Managed-Care-Programs-by-State/p9c7-tuup).
+
+```{r}
+careState <- read.csv("data/Department of Health and Human Services/Managed_Care_Programs_by_State.csv")
+careState
+```
+
+```{r}
+glimpse(careState)
+```
+
+#### beneMarket
+The Market Saturation and Utilization Data Tool was developed to allow the Centers for Medicare & Medicaid Services (CMS) to monitor market saturation as a means to help prevent potential fraud, waste, and abuse (FWA). Market saturation refers to the density of providers of a particular service within a defined geographic area relative to the number of beneficiaries receiving that service in the area. The data can be used to reveal the degree to which use of a service is related to the number of providers servicing a geographic region (data and texts from https://data.cms.gov/market-saturation/states-and-counties/methodology. 
+
+```{r}
+beneMarket <- read.csv("data/Department of Health and Human Services/Market_Saturation_And_Utilization_Dataset_2020-01-07.csv")
+beneMarket
+```
+
+```{r}
+glimpse(beneMarket)
+```
+
+#### longTermHospitalGeneral
+Updated on 3/11/2020, the following file is a list of long-term care hospitals with general information such as address, phone number, ownership data, bed counts and more (https://data.medicare.gov/Long-Term-Care-Hospital-Compare/Long-Term-Care-Hospital-General-Information/azum-44iv). 
+
+```{r}
+longTermHospitalGeneral <- read.csv("data/Department of Health and Human Services/Long-_Term_Care_Hospital_-_General_Information.csv")
+longTermHospitalGeneral
+```
+
+```{r}
+glimpse(longTermHospitalGeneral)
+```
+
+### Harvard Global Health Institute
+The following packages are from Harvard Global Health Institute in its research on state-level hospital bed capacity & COVID-19 estimates on 3/17/2020. The research makes localized predictions on the number of beds and ICU units, and additional capacity needed to accommodate COVID-19 patients over the coming months. (https://globalepidemics.org/our-data/hospital-capacity/) 
+
+#### hospitalBedState
+This is a state-wise census and predictions on hospital resources states currently have and potentially need in different COVID-19 infection scenario. 
+
+```{r}
+hospitalBedState <- read.csv("data/Hospital Capacity by State ( 20% _ 40% _ 60% ) - 20%.csv")
+hospitalBedState
+```
+
+```{r}
+glimpse(hospitalBedState)
+```
+
+#### hospitalBedCounty
+hospitalBedCounty is data on county-level, from the same source.
+
+```{r}
+hospitalBedCounty <- read.csv("data/HRR Scorecard_ 20% _ 40% _ 60% - 20% Population.csv")
+hospitalBedCounty
+```
+```{r}
+glimpse(hospitalBedCounty)
+```
+
+*note*
+A national statistical account of hospital bed counts is available here: https://usafacts.org/data/topics/people-society/health/hospitals-and-visits-2/hospital-beds/. 
+
+### U.S. Department of Homeland Security - hospital
+Hospital-wise hospital data from U.S. Department of Homeland Security (https://hifld-geoplatform.opendata.arcgis.com/datasets/hospitals):
+
+```{r}
+hospital <- read.csv("data/Hospitals.csv")
+hospital
+```
+
+```{r}
+glimpse(hospital)
+```
+
+### Demography
+Demography package is from the project "Mapping the Burden of COVID-19 in the United States" (https://github.com/ianfmiller/covid19-burden-mapping). 
+
+```{r}
+demography <- read.csv("data/covid19-burden-mapping-master/data/us.demog.data.csv")
+demography
+```
+
+```{r}
+glimpse(demography)
+```
+
+

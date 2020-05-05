@@ -1,0 +1,57 @@
+"State","Patients who reported that staff definitely gave care in a professional way and the facility was clean","Patients who reported that staff somewhat gave care in a professional way or the facility was somewhat clean","Patients who reported that staff did not give care in a professional way or the facility was not clean","Facilities and staff linear mean score","Patients who reported that staff definitely communicated about what to expect during and after the procedure","Patients who reported that staff somewhat communicated about what to expect during and after the procedure","Patients who reported that staff did not communicate about what to expect during and after the procedure","Communication about your procedure linear mean score","Patients who gave the facility a rating of 9 or 10 on a scale from 0 (lowest) to 10 (highest)","Patients who gave the facility a rating of 7 or 8 on a scale from 0 (lowest) to 10 (highest)","Patients who gave the facility a rating of 0 to 6 on a scale from 0 (lowest) to 10 (highest)","Patients’ rating of the facility linear mean score","Patients who reported YES they would DEFINITELY recommend the facility to family or friends.","Patients who reported PROBABLY YES they would recommend the facility to family or friends.","Patients who reported NO, they would not recommend the facility to family or friends.","Patients recommending the facility linear mean score","Number of Sampled Patients","Number of Completed Surveys","Survey Response Rate Percent","Start Date","End Date"
+Alabama,96,4,0,98,93,5,2,95,88,10,2,94,87,10,3,94,3730,974,26,10/01/2018,09/30/2019
+Alaska,,,,,,,,,,,,,,,,,,,,,
+American Samoa,,,,,,,,,,,,,,,,,,,,,
+Arizona,97,3,0,98,91,7,2,95,88,10,2,95,86,12,2,95,14917,4565,31,10/01/2018,09/30/2019
+Arkansas,,,,,,,,,,,,,,,,,,,,,
+California,97,3,0,98,90,8,2,94,87,11,2,94,85,13,2,94,39746,12672,32,10/01/2018,09/30/2019
+Colorado,98,2,0,99,91,7,2,95,87,11,2,94,83,15,2,93,13239,3915,30,10/01/2018,09/30/2019
+Commonwealth of the Northern Marianas Islands,,,,,,,,,,,,,,,,,,,,,
+Connecticut,98,2,0,99,90,8,2,94,87,9,4,94,82,16,2,93,866,263,30,10/01/2018,09/30/2019
+Delaware,,,,,,,,,,,,,,,,,,,,,
+District of Columbia,,,,,,,,,,,,,,,,,,,,,
+Florida,97,3,0,98,91,7,2,94,87,11,2,94,86,12,2,94,27343,10322,38,10/01/2018,09/30/2019
+Georgia,98,2,0,99,92,6,2,95,91,8,1,96,90,9,1,96,17344,4454,26,10/01/2018,09/30/2019
+Guam,,,,,,,,,,,,,,,,,,,,,
+Hawaii,98,2,0,99,92,6,2,95,89,9,2,95,88,10,2,95,3840,1549,40,10/01/2018,09/30/2019
+Idaho,98,2,0,99,95,4,1,97,90,8,2,95,90,8,2,96,1165,385,33,10/01/2018,09/30/2019
+Illinois,98,2,0,99,91,7,2,95,88,10,2,95,86,12,2,95,9121,3279,36,10/01/2018,09/30/2019
+Indiana,97,3,0,99,93,5,2,96,92,6,2,96,91,8,1,97,2064,858,42,10/01/2018,09/30/2019
+Iowa,97,3,0,98,89,9,2,93,83,14,3,93,81,17,2,93,1401,525,37,10/01/2018,09/30/2019
+Kansas,,,,,,,,,,,,,,,,,,,,,
+Kentucky,,,,,,,,,,,,,,,,,,,,,
+Louisiana,98,2,0,99,92,6,2,95,89,9,2,95,89,9,2,95,9373,2599,28,10/01/2018,09/30/2019
+Maine,99,1,0,99,93,5,2,96,92,7,1,96,89,10,1,96,1270,388,31,10/01/2018,09/30/2019
+Maryland,96,3,1,98,89,8,3,93,86,11,3,94,80,15,5,91,1418,279,20,10/01/2018,09/30/2019
+Massachusetts,98,1,1,99,92,7,1,95,84,14,2,94,84,14,2,94,1246,511,41,10/01/2018,09/30/2019
+Michigan,98,2,0,99,91,7,2,95,89,9,2,95,89,10,1,96,11339,4039,36,10/01/2018,09/30/2019
+Minnesota,98,2,0,99,92,7,1,96,88,11,1,95,86,13,1,95,6707,2564,38,10/01/2018,09/30/2019
+Mississippi,97,2,1,98,93,5,2,96,91,7,2,96,90,7,3,95,3083,809,26,10/01/2018,09/30/2019
+Missouri,97,3,0,99,92,6,2,95,88,10,2,95,86,12,2,94,22024,8055,37,10/01/2018,09/30/2019
+Montana,99,1,0,100,94,5,1,96,92,7,1,96,92,7,1,97,1001,332,33,10/01/2018,09/30/2019
+Nebraska,,,,,,,,,,,,,,,,,,,,,
+Nevada,97,3,0,98,91,7,2,94,89,9,2,95,87,11,2,94,4494,1227,27,10/01/2018,09/30/2019
+New Hampshire,98,2,0,99,94,5,1,96,87,11,2,95,88,11,1,95,4943,1405,28,10/01/2018,09/30/2019
+New Jersey,98,2,0,99,91,7,2,95,88,10,2,95,87,12,1,95,19338,6475,33,10/01/2018,09/30/2019
+New Mexico,95,4,1,97,89,8,3,93,81,15,4,93,78,18,4,91,2734,788,29,10/01/2018,09/30/2019
+New York,,,,,,,,,,,,,,,,,,,,,
+North Carolina,97,3,0,99,93,6,1,96,90,9,1,95,88,10,2,95,22890,6421,28,10/01/2018,09/30/2019
+North Dakota,98,1,1,99,89,10,1,95,84,13,3,93,88,10,2,96,935,311,33,10/01/2018,09/30/2019
+Ohio,98,2,0,99,92,6,2,95,89,9,2,95,87,11,2,95,7775,2835,36,10/01/2018,09/30/2019
+Oklahoma,97,3,0,98,90,8,2,94,87,10,3,95,86,13,1,95,4382,1621,37,10/01/2018,09/30/2019
+Oregon,97,3,0,99,92,7,1,95,87,11,2,95,87,11,2,95,12842,4421,34,10/01/2018,09/30/2019
+Pennsylvania,97,3,0,98,91,7,2,95,88,10,2,95,86,13,1,95,8895,3496,39,10/01/2018,09/30/2019
+Puerto Rico,,,,,,,,,,,,,,,,,,,,,
+Rhode Island,,,,,,,,,,,,,,,,,,,,,
+South Carolina,97,3,0,99,91,7,2,95,89,9,2,95,88,10,2,95,6677,2484,38,10/01/2018,09/30/2019
+South Dakota,99,1,0,99,91,7,2,95,90,8,2,96,85,12,3,94,1470,447,30,10/01/2018,09/30/2019
+Tennessee,98,2,0,99,92,6,2,96,90,9,1,95,89,10,1,96,28459,8435,30,10/01/2018,09/30/2019
+Texas,97,3,0,98,92,6,2,95,89,9,2,95,87,11,2,95,77629,20837,27,10/01/2018,09/30/2019
+Utah,98,2,0,99,91,7,2,95,90,8,2,95,87,11,2,95,3733,1056,28,10/01/2018,09/30/2019
+Vermont,,,,,,,,,,,,,,,,,,,,,
+Virgin Islands,,,,,,,,,,,,,,,,,,,,,
+Virginia,97,3,0,99,92,6,2,95,89,10,1,95,89,10,1,96,7550,2306,31,10/01/2018,09/30/2019
+Washington,98,2,0,99,93,6,1,96,88,10,2,95,87,12,1,95,22859,6691,29,10/01/2018,09/30/2019
+West Virginia,,,,,,,,,,,,,,,,,,,,,
+Wisconsin,98,2,0,99,92,7,1,96,89,9,2,95,89,10,1,96,2094,782,38,10/01/2018,09/30/2019
+Wyoming,98,2,0,99,92,6,2,95,86,12,2,94,86,12,2,95,2527,969,38,10/01/2018,09/30/2019

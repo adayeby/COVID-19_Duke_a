@@ -1,0 +1,41 @@
+"Value of Care Measure ID","Value of Care Measure Name","Number of Hospitals","Start Date","End Date"
+TOT_COMP_HIP_KNEE_AVERAGE_PAYM_90_HIP_KNEE_AVERAGE,Value of Care for hip/knee replacement patients - Average complications & average payment,1013,04/01/2015,03/31/2018
+TOT_COMP_HIP_KNEE_AVERAGE_PAYM_90_HIP_KNEE_HIGHER,Value of Care for hip/knee replacement patients - Average complications & higher payment,625,04/01/2015,03/31/2018
+TOT_COMP_HIP_KNEE_AVERAGE_PAYM_90_HIP_KNEE_LOWER,Value of Care for hip/knee replacement patients - Average complications & lower payment,1021,04/01/2015,03/31/2018
+TOT_COMP_HIP_KNEE_BETTER_PAYM_90_HIP_KNEE_AVERAGE,Value of Care for hip/knee replacement patients - Better complications & average payment,10,04/01/2015,03/31/2018
+TOT_COMP_HIP_KNEE_BETTER_PAYM_90_HIP_KNEE_HIGHER,Value of Care for hip/knee replacement patients - Better complications & higher payment,3,04/01/2015,03/31/2018
+TOT_COMP_HIP_KNEE_BETTER_PAYM_90_HIP_KNEE_LOWER,Value of Care for hip/knee replacement patients - Better complications & lower payment,51,04/01/2015,03/31/2018
+TOT_COMP_HIP_KNEE_NUM_HOSPITALS,Number of hospitals containing at least 25 hip/knee replacement cases,2781,04/01/2015,03/31/2018
+TOT_COMP_HIP_KNEE_WORSE_PAYM_90_HIP_KNEE_AVERAGE,Value of Care for hip/knee replacement patients - Worse complications & average payment,11,04/01/2015,03/31/2018
+TOT_COMP_HIP_KNEE_WORSE_PAYM_90_HIP_KNEE_HIGHER,Value of Care for hip/knee replacement patients - Worse complications & higher payment,37,04/01/2015,03/31/2018
+TOT_COMP_HIP_KNEE_WORSE_PAYM_90_HIP_KNEE_LOWER,Value of Care for hip/knee replacement patients - Worse complications & lower payment,10,04/01/2015,03/31/2018
+TOT_MORT_30_AMI_AVERAGE_PAYM_30_AMI_AVERAGE,Value of Care for heart attack patients - Average mortality & average payment,1854,07/01/2015,06/30/2018
+TOT_MORT_30_AMI_AVERAGE_PAYM_30_AMI_HIGHER,Value of Care for heart attack patients - Average mortality & higher payment,188,07/01/2015,06/30/2018
+TOT_MORT_30_AMI_AVERAGE_PAYM_30_AMI_LOWER,Value of Care for heart attack patients - Average mortality & lower payment,158,07/01/2015,06/30/2018
+TOT_MORT_30_AMI_BETTER_PAYM_30_AMI_AVERAGE,Value of Care for heart attack patients - Better mortality & average payment,21,07/01/2015,06/30/2018
+TOT_MORT_30_AMI_BETTER_PAYM_30_AMI_HIGHER,Value of Care for heart attack patients - Better mortality & higher payment,5,07/01/2015,06/30/2018
+TOT_MORT_30_AMI_BETTER_PAYM_30_AMI_LOWER,Value of Care for heart attack patients - Better mortality & lower payment,6,07/01/2015,06/30/2018
+TOT_MORT_30_AMI_NUM_HOSPITALS,Number of hospitals containing at least 25 heart attack cases,2243,07/01/2015,06/30/2018
+TOT_MORT_30_AMI_WORSE_PAYM_30_AMI_AVERAGE,Value of Care for heart attack patients - Worse mortality & average payment,9,07/01/2015,06/30/2018
+TOT_MORT_30_AMI_WORSE_PAYM_30_AMI_HIGHER,Value of Care for heart attack patients - Worse mortality & higher payment,2,07/01/2015,06/30/2018
+TOT_MORT_30_AMI_WORSE_PAYM_30_AMI_LOWER,Value of Care for heart attack patients - Worse mortality & lower payment,0,07/01/2015,06/30/2018
+TOT_MORT_30_HF_AVERAGE_PAYM_30_HF_AVERAGE,Value of Care for heart failure patients - Average mortality & average payment,2342,07/01/2015,06/30/2018
+TOT_MORT_30_HF_AVERAGE_PAYM_30_HF_HIGHER,Value of Care for heart failure patients - Average mortality & higher payment,450,07/01/2015,06/30/2018
+TOT_MORT_30_HF_AVERAGE_PAYM_30_HF_LOWER,Value of Care for heart failure patients - Average mortality & lower payment,363,07/01/2015,06/30/2018
+TOT_MORT_30_HF_BETTER_PAYM_30_HF_AVERAGE,Value of Care for heart failure patients - Better mortality & average payment,93,07/01/2015,06/30/2018
+TOT_MORT_30_HF_BETTER_PAYM_30_HF_HIGHER,Value of Care for heart failure patients - Better mortality & higher payment,87,07/01/2015,06/30/2018
+TOT_MORT_30_HF_BETTER_PAYM_30_HF_LOWER,Value of Care for heart failure patients - Better mortality & lower payment,20,07/01/2015,06/30/2018
+TOT_MORT_30_HF_NUM_HOSPITALS,Number of hospitals containing at least 25 heart failure cases,3501,07/01/2015,06/30/2018
+TOT_MORT_30_HF_WORSE_PAYM_30_HF_AVERAGE,Value of Care for heart failure patients - Worse mortality & average payment,91,07/01/2015,06/30/2018
+TOT_MORT_30_HF_WORSE_PAYM_30_HF_HIGHER,Value of Care for heart failure patients - Worse mortality & higher payment,25,07/01/2015,06/30/2018
+TOT_MORT_30_HF_WORSE_PAYM_30_HF_LOWER,Value of Care for heart failure patients - Worse mortality & lower payment,30,07/01/2015,06/30/2018
+TOT_MORT_30_PN_AVERAGE_PAYM_30_PN_AVERAGE,Value of Care for pneumonia patients - Average mortality & average payment,2193,07/01/2015,06/30/2018
+TOT_MORT_30_PN_AVERAGE_PAYM_30_PN_HIGHER,Value of Care for pneumonia patients - Average mortality & higher payment,633,07/01/2015,06/30/2018
+TOT_MORT_30_PN_AVERAGE_PAYM_30_PN_LOWER,Value of Care for pneumonia patients - Average mortality & lower payment,772,07/01/2015,06/30/2018
+TOT_MORT_30_PN_BETTER_PAYM_30_PN_AVERAGE,Value of Care for pneumonia patients - Better mortality & average payment,88,07/01/2015,06/30/2018
+TOT_MORT_30_PN_BETTER_PAYM_30_PN_HIGHER,Value of Care for pneumonia patients - Better mortality & higher payment,82,07/01/2015,06/30/2018
+TOT_MORT_30_PN_BETTER_PAYM_30_PN_LOWER,Value of Care for pneumonia patients - Better mortality & lower payment,50,07/01/2015,06/30/2018
+TOT_MORT_30_PN_NUM_HOSPITALS,Number of hospitals containing at least 25 pneumonia cases,4088,07/01/2015,06/30/2018
+TOT_MORT_30_PN_WORSE_PAYM_30_PN_AVERAGE,Value of Care for pneumonia patients - Worse mortality & average payment,134,07/01/2015,06/30/2018
+TOT_MORT_30_PN_WORSE_PAYM_30_PN_HIGHER,Value of Care for pneumonia patients - Worse mortality & higher payment,80,07/01/2015,06/30/2018
+TOT_MORT_30_PN_WORSE_PAYM_30_PN_LOWER,Value of Care for pneumonia patients - Worse mortality & lower payment,56,07/01/2015,06/30/2018

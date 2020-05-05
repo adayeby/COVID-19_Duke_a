@@ -1,0 +1,7 @@
+"Hospital Name","Hospital CCN","Domain","Subdomain","Measure ID","Measure Name","Hospital Value","Comparison Group Value","Comparison Group Geography","Comparison Group Type","Comparison Group Size","Number of Peers in Comparison Group"
+"DUKE UNIVERSITY HOSPITAL","340030","Safety","Healthcare Associated Infections (HAI)","HAI-1-SIR","Central Line Associated Bloodstream Infection (Icu + Select Wards)","1.00%","0.78%","Nation","All","All","1998"
+"DUKE UNIVERSITY HOSPITAL","340030","Safety","Healthcare Associated Infections (HAI)","HAI-2-SIR","Catheter Associated Urinary Tract Infections (Icu + Select Wards)","0.86%","0.86%","Nation","All","All","2298"
+"DUKE UNIVERSITY HOSPITAL","340030","Safety","Healthcare Associated Infections (HAI)","HAI-3-SIR","Ssi - Colon Surgery","0.67%","0.86%","Nation","All","All","1875"
+"DUKE UNIVERSITY HOSPITAL","340030","Safety","Healthcare Associated Infections (HAI)","HAI-4-SIR","Ssi - Abdominal Hysterectomy","0.25%","0.90%","Nation","All","All","739"
+"DUKE UNIVERSITY HOSPITAL","340030","Safety","Healthcare Associated Infections (HAI)","HAI-5-SIR","Mrsa Bacteremia","0.82%","0.89%","Nation","All","All","1697"
+"DUKE UNIVERSITY HOSPITAL","340030","Safety","Healthcare Associated Infections (HAI)","HAI-6-SIR","Clostridium Difficile (C.Diff)","1.02%","0.77%","Nation","All","All","3092"

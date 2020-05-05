@@ -1,0 +1,20 @@
+"Measure ID","Measure Name","National Rate","Number of Hospitals Worse","Number of Hospitals Same","Number of Hospitals Better","Number of Hospitals Too Few","Footnote","Start Date","End Date"
+COMP_HIP_KNEE,Rate of complications for hip/knee replacement patients,2.5,58,2664,64,656,,04/01/2015,03/31/2018
+MORT_30_AMI,Death rate for heart attack patients,12.9,11,2343,33,1917,,07/01/2015,06/30/2018
+MORT_30_CABG,Death rate for CABG surgery patients,3.1,19,987,9,164,,07/01/2015,06/30/2018
+MORT_30_COPD,Death rate for COPD patients,8.5,72,3485,58,926,,07/01/2015,06/30/2018
+MORT_30_HF,Death rate for heart failure patients,11.5,146,3307,237,971,,07/01/2015,06/30/2018
+MORT_30_PN,Death rate for pneumonia patients,15.6,270,3720,264,469,,07/01/2015,06/30/2018
+MORT_30_STK,Death rate for stroke patients,13.8,76,2424,46,1767,,07/01/2015,06/30/2018
+PSI_10_POST_KIDNEY,Postoperative Acute Kidney Injury Requiring Dialysis Rate,1.35,33,2770,4,201,,07/01/2016,06/30/2018
+PSI_11_POST_RESP,Postoperative Respiratory Failure Rate,7.35,146,2565,70,217,,07/01/2016,06/30/2018
+PSI_12_POSTOP_PULMEMB_DVT,Serious blood clots after surgery,3.85,121,2863,36,111,,07/01/2016,06/30/2018
+PSI_13_POST_SEPSIS,Blood stream infection after surgery,5.09,60,2707,19,209,,07/01/2016,06/30/2018
+PSI_14_POSTOP_DEHIS,A wound that splits open after surgery on the abdomen or pelvis,0.95,4,2770,0,286,,07/01/2016,06/30/2018
+PSI_15_ACC_LAC,Accidental cuts and tears from medical treatment,1.29,33,2951,2,166,,07/01/2016,06/30/2018
+PSI_3_ULCER,Pressure sores,0.52,221,2928,89,56,,07/01/2016,06/30/2018
+PSI_4_SURG_COMP,Deaths among Patients with Serious Treatable Complications after Surgery,163.01,65,1689,45,949,,07/01/2016,06/30/2018
+PSI_6_IAT_PTX,Collapsed lung due to medical treatment,0.27,25,3239,2,39,,07/01/2016,06/30/2018
+PSI_8_POST_HIP,Broken hip from a fall after surgery,0.11,1,3261,0,41,,07/01/2016,06/30/2018
+PSI_90_SAFETY,Serious complications,1.00,202,3009,94,Not Available,,07/01/2016,06/30/2018
+PSI_9_POST_HEM,Perioperative Hemorrhage or Hematoma Rate,2.53,39,2973,3,115,,07/01/2016,06/30/2018

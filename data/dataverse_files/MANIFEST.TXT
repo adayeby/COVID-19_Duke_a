@@ -1,0 +1,3 @@
+us_metro_basemap_esri.zip (application/zipped-shapefile) 32834299 bytes.
+us_metro_confirmed_cases.csv (text/csv) 374471 bytes.
+us_metro_death_cases.csv (text/csv) 347150 bytes.
