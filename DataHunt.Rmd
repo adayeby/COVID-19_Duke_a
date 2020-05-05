@@ -1,0 +1,157 @@
+---
+title: "COVID-19 Data Directory"
+output: html_notebook
+author: Ada Ye
+---
+
+This notebook documents COVID-19 related datasets for further research on COVID-19 response and medical systems. 
+
+```{r}
+library(tidyverse)
+library(xlsx)
+```
+
+### Our World in Data
+Our World in Data on COVID-19 as of 5/2/2020. Visualizations are available in the link in the citation. 
+
+Max Roser, Hannah Ritchie, Esteban Ortiz-Ospina and Joe Hasell (2020) - "Coronavirus Pandemic (COVID-19)". Published online at OurWorldInData.org. Retrieved from: 'https://ourworldindata.org/coronavirus' [Online Resource]
+
+```{r}
+owidOxford <- read.csv("data/owid-covid-data.csv")
+owidOxford
+```
+```{r}
+glimpse(owidOxford)
+```
+
+### JHU CSSE
+This section imports the dataset from Johns Hopkins Center for Systems Science and Engineering (https://github.com/CSSEGISandData/COVID-19) as of 4/30/2020. This is the link to JHU's COVID-19 interactive dashboard:https://coronavirus.jhu.edu
+
+The data sources include the World Health Organization, the U.S. Centers for Disease Control and Prevention, the European Center for Disease Prevention and Control, the National Health Commission of the People’s Republic of China, 1point3acres, Worldometers.info, BNO, state and national government health departments, local media reports, and the DXY, one of the world’s largest online communities for physicians, health care professionals, pharmacies and facilities.
+
+This paper (https://www.nature.com/articles/s41598-019-38665-w), authored by JHU researchers, constructs a mathematical model that integrates both epidemic outbreaks and outbreak control into the framework, with a primary focus on border control, i.e. passenger screening upon arrival at the airports. The main finding is that implementing control measures according to the network-driven strategy is the most effective at the initial stage of the outbreak. Network-driven strategy means that airports within the epidimeological infection range are identified and have control measures implemented. Policy-makers can improve resource allocation in a cost-effective manner by considering the research finding. The research also shows that the effectiveness of border control decreases as the outbreak continues, and other measures are not included in the framework. What works better as the outbreak unfolds is not answered in this research. 
+
+#### jhuGlobalC
+
+jhuGlobalC (as a variable name in this notebook, not the original dataset name) is JHU CSSE's dataset on global confirmed COVID-19 cases. As shown below, it records the increases in number of cases daily since 1/22/2020 in states and provinces across countries, as well as the geographic locations of regions for mapping convenience. 
+
+```{r}
+jhuGlobalC <- read.csv("data/COVID-19-master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv")
+jhuGlobalC
+```
+
+```{r}
+glimpse(jhuGlobalC)
+```
+
+#### jhuUSC
+
+The following data is on COVID-19 confirmed cases in the U.S.
+
+```{r}
+jhuUSC <- read.csv("data/COVID-19-master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_US.csv")
+jhuUSC
+```
+
+```{r}
+glimpse(jhuUSC)
+```
+
+### COVID Tracking Project
+U.S. testing rate and hospitalization rate, cited by JHU, is from the COVID Tracking Project (https://covidtracking.com). COVID Tracking Project's information comes from state health authorities. Basic testing data is relatively complete now, yet patient outcomes data (hospitalizations, ICU status, ventilation status, deaths, and recoveries) is less consistent. 
+
+Notes on visualization: 
+1. Encode a per capita count for choropleth map. If you want to show absolute numbers, usee a symbol map. 
+2. Use an absolute measure for death counts. 
+
+COVIDTrackingHistoricS51 documents U.S. state historic testing and hospitalization data as of 5/1/2020. 
+
+```{r}
+COVIDTrackingHistoricS51 <- read.csv("data/COVIDTracking/daily.csv")
+COVIDTrackingHistoricS51
+```
+
+```{r}
+glimpse(COVIDTrackingHistoricS51)
+```
+
+### China Data Lab
+The following datasets are from China Data Lab Dataverse at Harvard University. 
+#### US Metropolitan Daily Cases with Basemap
+Updated to April 27, 2020. Metropolitan level daily cases. There are 926 metropolitans except for the areas in Perto Rico.
+
+China, Data Lab, 2020, "US Metropolitan Daily Cases with Basemap", https://doi.org/10.7910/DVN/5B8YM8, Harvard Dataverse, V1, UNF:6:7uG7/nVR7uOM5wui70J7XQ== [fileUNF]
+
+```{r}
+USMetroConfirm <- read.csv("data/dataverse_files/us_metro_confirmed_cases.csv")
+USMetroConfirm
+```
+```{r}
+glimpse(USMetroConfirm)
+```
+
+*note*
+Inside the dataverse_files folder, there are datasets on China COVID-19, environmental data in China from 1/1/2020 to 4/21/2020, timeline for policies and regulations in China, and U.S. socioeconomic data from U.S. census bureau. The website also includes datasets on population mobility in China, world COVID-19 data, global news and research papers. 
+
+#### healthChina
+The imported file is on health facilities in China, also from China Data Lab.
+
+```{r}
+healthChina <- read.xlsx("data/dataverse_files/Hospitals_by_Province.xlsx",1,header = TRUE)
+healthChina
+```
+
+```{r}
+glimpse(healthChina)
+```
+
+### IHME
+The following data predicts the hospital resources needed for COVID-19 outbreaks at county-level (https://covid19.healthdata.org/united-states-of-america). 
+```{r}
+IHMEHospital <- read.csv("data/IHME Hospitalization 2020_04_28.02/Hospitalization_all_locs.csv")
+IHMEHospital
+```
+
+```{r}
+glimpse(IHMEHospital)
+```
+
+### County-level stats from New York Times
+The next data is county-level COVID-19 statistics, collected by New York Times (https://www.nytimes.com/interactive/2020/us/coronavirus-us-cases.html), as of 5/3/2020. The same folder also contains U.S. states and U.S. data. 
+
+```{r}
+COVIDUSCounty <- read.csv("data/covid-19-data-nytimes/us-counties.csv")
+COVIDUSCounty
+```
+
+```{r}
+glimpse(COVIDUSCounty)
+```
+
+### Other helpful links:
+1. Hong Kong COVID-19 data https://chp-dashboard.geodata.gov.hk/covid-19/zh.html
+
+2. Italy COVID-19 data
+https://github.com/pcm-dpc/COVID-19
+
+3. Academic Resources
+a. Mitigating COVID-19 outbreak via high testing capacity and strong transmission-intervention in the United States
+https://www.medrxiv.org/content/10.1101/2020.04.03.20052720v1
+
+Quotes from Abstract:  Modeling reveals that curbing interstate travel when the disease is already widespread will make little difference. Meanwhile, increased testing capacity (facilitating early identification of infected people and quick isolation) and strict social-distancing and self-quarantine rules are effective in abating the outbreak. The modeling has also produced state-specific information. For example, for New York and Michigan, isolation of persons exposed to the virus needs to be imposed within 2 days to prevent a broad outbreak, whereas for other states this period can be 3.6 days. This model could be used to determine resources needed before safely lifting state policies on social distancing.
+
+b. U.S. county-level characteristics to inform equitable COVID-19 response
+https://www.medrxiv.org/content/10.1101/2020.04.08.20058248v1.full.pdf
+
+This research examines a range of intersecting biological, demographic and socioeconomic factors that determine one's vulnerability to COVID-19 in the U.S. These factors vary greatly across the U.S., and reflect the structural issues within the American society. Bivariate maps (grouping age and poverty; comorbidities and lack of health insurance; proximity, density and bed capacity; and race and ethnicity, and premature death) are produced in the link to map the trends discovered. 
+
+4. Data directory
+https://covid-19.stcenter.net/index.php/data-access/
+
+5. Google Community Mobility Report
+https://www.google.com/covid19/mobility/
+
+6. This video (https://www.youtube.com/watch?v=Oeg3jF5xs6o&feature=youtu.be&t=147) demonstrates the use of anonymized, data-driven methods to track COVID-19 spread and evaluations using OmniSci. Devices can be mapped to facilitate the tracing of spreading sources and contribute to relief efforts. Some sample codes are offered in the video on building models (linear regression) to analyze factors that contribute to the spread of COVID-19. 
+
+7. COVID-19 Hospital Impact Model for Epidemics (CHIME)
+This model is developed by Predictive Healthcare at Penn Medicine to assist hospitals and public health officials with hospital capacity planning. The model and introduction is available here (https://penn-chime.phl.io). It is based on the SIR model, and briefings on this model can be found here (https://en.wikipedia.org/wiki/Compartmental_models_in_epidemiology#The_SIR_model). The SIR model does not involve hospital facility datasets or demographics.
