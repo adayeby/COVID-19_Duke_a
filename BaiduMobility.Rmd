@@ -1,0 +1,252 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+The source is from Baidu https://qianxi.baidu.com/. 
+1. On the Baidu Qianxi website, it just lists the top 100 cities and values indicate the percentages.
+2. For baidu_in_.csv, the columns are the in-cities; for baidu_out.csv, the columns are the out-cities.
+3. January 1 ~ March 8, the city names are in Chinese; after March 9, the city naems are in English
+4. Please read 'Index_City_EN_CH.csv' file to convert the Chinese and English names
+5. After April 5, city index added to the names. The order of index and column names keep the same in all files.  
+
+
+***If you use the data, please cite the data source and our dataset https://doi.org/10.7910/DVN/FAEZIO.
+
+China Data Lab, 2020, "Baidu Mobility Data", https://doi.org/10.7910/DVN/FAEZIO, Harvard Dataverse, V15, UNF:6:7UstLboGeHwlEYpNmILncg== [fileUNF]
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+baiduIn <- read.csv("baidu_in_clean.csv")
+baiduIn <- mutate(baiduIn, date = as.Date(Date,"%m/%d/%y"))
+```
+
+```{r}
+baiduIn %>% 
+  filter(City_in == "Beijing_110000") %>%
+  group_by(City_out)%>%
+  summarise(avg = mean(X.,na.rm=T)) %>%
+  na.omit() %>%
+  arrange(desc(avg))%>%
+  slice(11:20) %>%
+  mutate(City_out_name = substr(as.character(City_out),1,nchar(as.character(City_out))-7)) %>%
+  ggplot()+
+  geom_bar(mapping = aes(x = City_out_name, y = avg), stat = "identity",fill="steelblue") +
+  theme_minimal()
+```
+
+```{r}
+baiduOut <- read.csv("baidu_out_clean.csv")
+baiduOut <- baiduOut %>% 
+  mutate(date = as.Date(Date,"%m/%d/%y")) %>%
+  mutate(city_out = as.character(City_out)) %>%
+  mutate(city_in = as.character(City_in)) %>%
+  select(date,city_out,city_in,X.)
+```
+
+
+```{r}
+baiduOut %>% 
+  filter(city_out == "Shanghai_310000",city_in == "Wuhan_420100") %>%
+  ggplot(mapping = aes(x = date,y = X.))+
+  geom_point()
+```
+
+```{r}
+baiduOut %>% 
+  filter(city_out == "Wuhan_420100",city_in == "Shanghai_310000") %>%
+  ggplot(mapping = aes(x = date,y = X.))+
+  geom_point()
+```
+
+```{r}
+baiduOut %>% 
+  filter(city_out == "Shanghai_310000") %>%
+  group_by(city_in)%>%
+  summarise(avg = mean(X.,na.rm=T)) %>%
+  na.omit() %>%
+  arrange(desc(avg))%>%
+  slice(1:5) %>%
+  mutate(city_in_name = substr(as.character(city_in),1,nchar(as.character(city_in))-7)) %>%
+  ggplot()+
+  geom_bar(mapping = aes(x = city_in_name, y = avg), stat = "identity",fill="steelblue") +
+  theme_minimal()
+```
+
+```{r}
+chunyun <- read.csv("data/Mobility_chunyun2018.csv")
+chunyun
+```
+```{r}
+chunyuncode <- read.csv("chunyunFinal.csv")
+chunyuncode <- chunyuncode %>% 
+  mutate(date = as.Date(date,"%m/%d/%y")) %>%
+  mutate(origin = as.character(Origin)) %>%
+  mutate(destination  = as.character(Destination)) %>%
+  select(Day,origin,destination,Mobility.Index,date)
+chunyuncode
+```
+
+```{r}
+chunyun %>%
+  filter(Origin == "Beijing", Destination == "Shanghai") %>%
+  ggplot()+
+  geom_point(mapping = aes(x = Day, y = Mobility.Index))
+```
+
+```{r}
+baiduOut %>%
+  filter(city_out == "Beijing_110000", city_in == "Shanghai_310000", date > as.Date("2020-01-09"), date < as.Date("2020-01-24")) %>%
+  ggplot()+
+  geom_point(mapping = aes(x = date, y = X.))
+```
+
+```{r}
+chunyun %>%
+  group_by(Day,Origin) %>%
+  summarise(total_out = sum(Mobility.Index)) %>%
+  arrange(Day,desc(total_out)) %>%
+  filter(Origin == "Beijing")
+```
+```{r}
+beijingDay1 <- chunyun%>%
+  filter(Origin == "Beijing",Day == 1)
+beijingDay1
+```
+
+```{r}
+processCY <- function(cityOut){
+  dat <- filter(chunyuncode,origin == cityOut)
+  dat$destination
+}
+```
+
+Wenzhou data is missing here. 
+```{r}
+baiduOut %>%
+  filter(city_out == "Beijing_110000", substr(as.character(city_in),1,nchar(as.character(city_in))-7) %in% beijingDay1$destination, date > as.Date("2020-01-09"), date < as.Date("2020-01-24")) %>%
+  na.omit() %>%
+  group_by(date) %>%
+  summarise(sumPercent = sum(X.))
+```
+
+```{r}
+totalBaidu <- baiduOut %>%
+  filter(date > as.Date("2020-01-09"), date < as.Date("2020-01-24")) %>%
+  group_by(city_out) %>%
+  filter(as.character(city_in) %in% processCY(as.character(city_out))) %>%
+  na.omit() %>%
+  group_by(date,city_out) %>%
+  summarise(sumPercent = sum(X.))
+totalBaidu
+```
+```{r}
+totalBaidu %>% 
+  filter(sumPercent > 0) %>%
+  group_by(city_out) %>%
+  summarise(avgPercent = mean(sumPercent)) %>%
+  arrange(avgPercent)
+  # ggplot()+
+  # geom_point(aes(x = city_out,y = avgPercent))
+```
+
+```{r}
+sumCY <- chunyuncode %>%
+  group_by(date,origin) %>%
+  summarise(total_out = sum(Mobility.Index)) %>%
+  arrange(date) 
+sumCY
+```
+It seems that the data for Hainan is very incomplete during that period in 2020. 
+
+```{r}
+combo <- inner_join(sumCY, totalBaidu, by = c("origin" = "city_out","date" = "date"))
+combo <- filter(combo,total_out != 0, sumPercent != 0)
+```
+
+```{r}
+combo <- combo %>% 
+  mutate(total_est = total_out/(sumPercent/100))
+  # select(date,Origin,total_est) 
+  # filter(Origin == "Shanghai_310000") %>%
+  # group_by(date) %>%
+  # summarise(sum_out = sum(total_est))
+combo
+```
+
+```{r}
+rand <- sample_n(combo,10) %>% filter(date == as.Date("2020-01-10"))
+rand$origin
+```
+
+```{r}
+combo %>% 
+  filter(origin %in% rand$origin) %>%
+  ggplot()+
+  geom_line(mapping = aes(x = date, y = total_est,color = origin))
+```
+
+```{r}
+sumCY %>%
+  filter(origin %in% rand$origin) %>%
+  ggplot()+
+  geom_line(mapping = aes(x = date, y = total_out,color = origin))
+```
+
+```{r}
+exp <- c("Beijing_110000","Shanghai_310000","Wuhan_420100")
+combo %>% 
+  filter(origin %in% exp) %>%
+  ggplot()+
+  geom_line(mapping = aes(x = date, y = total_est,color = origin))
+```
+
+```{r}
+sumCY%>% 
+  filter(origin %in% exp) %>%
+  ggplot()+
+  geom_line(mapping = aes(x = date, y = total_out,color = origin))
+```
+
+```{r}
+chunyuncode %>%
+  filter(origin == "Beijing_110000", destination == "Shanghai_310000") %>%
+  ggplot()+
+  geom_line(mapping = aes(x = Day, y = Mobility.Index))
+```
+
+```{r}
+write.csv(combo,"predicted_total_outflow.csv")
+```
+
+```{r}
+baiduCY <- baiduOut %>%
+  filter(date > as.Date("2020-01-09"), date < as.Date("2020-01-24")) %>%
+  na.omit() %>%
+  filter(X. != 0)
+baiduCY
+```
+
+```{r}
+write.csv(baiduCY,"baidu_chunyun.csv")
+```
+
+```{r}
+newBaiduout <- read.csv("new_baidu_out.csv")
+newBaiduout <- newBaiduout %>%
+  select(-Unnamed..0) %>%
+  mutate(date = as.Date(date))
+newBaiduout
+```
+
+```{r}
+newBaiduout %>%
+  filter(city_out == "Beijing_110000", city_in == "Shanghai_310000") %>%
+  ggplot()+
+  geom_line(mapping = aes(x = date, y = predicted_flow))
+```
+
+

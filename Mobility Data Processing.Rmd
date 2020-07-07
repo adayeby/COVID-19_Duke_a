@@ -1,0 +1,77 @@
+---
+title: "Mobility Data Processing"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+options(scipen = 999)
+```
+
+```{r}
+newBaiduout <- read.csv("new_baidu_out.csv")
+newBaiduout <- newBaiduout %>%
+  select(-Unnamed..0) %>%
+  mutate(date = as.Date(date)) %>%
+  mutate(city_out_name = substr(as.character(city_out),1,nchar(as.character(city_out))-7)) %>%
+  mutate(city_in_name = substr(as.character(city_in),1,nchar(as.character(city_in))-7)) %>%
+  rename("Percentages" = "X.")
+newBaiduout
+```
+
+```{r}
+write.csv(newBaiduout,"new_baidu_out.csv")
+#done
+```
+
+```{r}
+#Province
+cityprov <- read.csv("baidu_out_city_prov.csv")
+```
+
+```{r}
+cityprov <- cityprov %>%
+  select(-Unnamed..0,-X.1) %>%
+  mutate(date = as.Date(date)) 
+cityprov
+```
+
+```{r}
+baiduprov <- cityprov %>%
+  group_by(prov_out,prov_in,date) %>%
+  summarise(total_flow = sum(predicted_flow, na.rm = TRUE)) %>%
+  filter(prov_out != prov_in)
+baiduprov
+```
+
+```{r}
+baiduprov %>%
+  filter(prov_out == "Hubei") %>%
+  ggplot()+
+  geom_line(mapping = aes(x = date, y = total_flow, color = prov_in))
+```
+
+```{r}
+baiduprov %>%
+  filter(prov_out == "Shanghai") %>%
+  ggplot()+
+  geom_line(mapping = aes(x = date, y = total_flow, color = prov_in))
+```
+
+```{r}
+baiduprov %>%
+  filter(prov_out == "Beijing") %>%
+  ggplot()+
+  geom_line(mapping = aes(x = date, y = total_flow, color = prov_in))
+```
+
+```{r}
+write.csv(baiduprov,"baidu_prov_out.csv")
+```
+
+```{r}
+baiduprov %>%
+  ggplot()+
+  geom_point(aes(x = date,y = total_flow))
+```
+

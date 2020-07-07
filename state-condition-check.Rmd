@@ -1,0 +1,177 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+options(scipen = 999)
+```
+
+```{r}
+us_states <- read.csv("data/covid-19-data-nytimes/us-states.csv")
+us_states$date <- as.Date(us_states$date)
+us_states <- us_states %>%
+    group_by(state) %>%
+    mutate(new_cases = cases - lag(cases)) %>%
+    mutate(new_cases = replace_na(new_cases,1))
+us_states
+```
+
+```{r}
+write.csv(us_states,"data/covid-19-data-nytimes/us-states.csv")
+```
+
+```{r}
+start <- us_states %>%
+  filter(cases >= 500) %>%
+  group_by(state) %>%
+  mutate(start = min(date))%>%
+  select(state,start) %>%
+  distinct()
+start
+```
+
+```{r}
+fourteendays <- function(s){
+  startd <- start[start$state == s,"start"]$start
+  if (is.na(startd)){
+    return(c(s,"NA",NA,NA))
+  }
+  i <- 0
+  totalday <- 0
+  for (d in 1:(as.numeric(max(us_states$date) - as.Date(startd)))){
+    if (i == 14){
+      return(c(s,as.character(startd),as.character(startd+d),totalday))
+    }
+    if (us_states[us_states$state == s & us_states$date == startd + d,"new_cases"]$new_cases <= us_states[us_states$state == s & us_states$date == startd + d - 1,"new_cases"]$new_cases){
+      i <- i+1
+    } else{
+      i <- 0
+    }
+    totalday <- totalday+1
+  }
+  c(s,as.character(startd),NA,NA)
+}
+```
+
+```{r}
+statesuccess <- data.frame("state" = character(0),"start_date" = character(0), "end_date" = character(0), "days_taken" = integer(0))
+processData <- function(s){
+  ret <- fourteendays(s)
+  statesuccess <- add_row(statesuccess,state = ret[1],start_date = ret[2], end_date = ret[3], days_taken = as.numeric(ret[4]))
+  statesuccess
+}
+for (s in start$state){
+  statesuccess <- processData(s)
+}
+statesuccess
+```
+
+```{r}
+state_condition <- us_states %>%
+  group_by(state) %>%
+  summarise(total_case = max(cases),total_death = max(deaths)) %>%
+  inner_join(statesuccess,by = "state")
+state_condition
+```
+
+
+
+```{r}
+us_counties <- read.csv("data/covid-19-data-nytimes/us-counties.csv")
+us_counties$date <- as.Date(us_counties$date)
+us_counties$fips[us_counties$county == "New York City"] <- 36061
+us_counties$fips[us_counties$county == "Kansas City"] <- 38000
+us_counties <- us_counties %>% 
+    filter(county != "Unknown") %>%
+    group_by(fips) %>%
+    mutate(new_cases = cases - lag(cases)) %>%
+    mutate(new_cases = replace_na(new_cases,1))
+us_counties
+```
+
+```{r}
+write.csv(us_counties,"data/covid-19-data-nytimes/us-counties.csv")
+```
+
+```{r}
+startc <- us_counties %>%
+  filter(cases >= 50) %>%
+  group_by(fips) %>%
+  mutate(start = min(date))%>%
+  select(fips,county,state,start) %>%
+  distinct() 
+startc
+```
+
+```{r}
+fourteendayc <- function(f){
+  startd <- startc[startc$fips == f,"start"]$start[1]
+  if (is.na(startd)){
+    return(c(f,"NA",NA,NA))
+  }
+  if (startd == max(us_counties$date)){
+    return((c(f,as.character(startd),NA,NA)))
+  }
+  i <- 0
+  totalday <- 0
+  temp <- filter(us_counties,fips == f)
+  june <- max(filter(temp,date >= as.Date("2020-06-01"))$new_cases)
+  for (d in 1:(as.numeric(max(us_counties$date) - as.Date(startd)))){
+    if (i == 14 & filter(temp, date == startd+d-1)$new_cases >= june){
+      return(c(f,as.character(startd),as.character(startd+d),totalday))
+    } else if (i == 14){
+      return((c(f,as.character(startd),NA,NA)))
+    } else{
+    if (filter(temp, date == startd+d)$new_cases <= filter(temp, date == startd+d-1)$new_cases){
+      i <- i+1
+    } else{
+      i <- 0
+      }
+    }
+    totalday <- totalday+1
+  }
+  c(f,as.character(startd),NA,NA)
+}
+```
+
+```{r}
+countysuccess <- data.frame("fips" = integer(0),"start_date" = character(0), "end_date" = character(0), "days_taken" = integer(0))
+for (f in startc$fips){
+  ret <- fourteendayc(f)
+  countysuccess <- add_row(countysuccess,fips = as.numeric(ret[1]),start_date = ret[2], end_date = ret[3], days_taken = as.numeric(ret[4]))
+}
+countysuccess
+```
+
+```{r}
+county_condition <- us_counties %>%
+  group_by(fips) %>%
+  summarise(total_case = max(cases),total_death = max(deaths)) %>%
+  full_join(countysuccess,by = "fips") %>%
+  right_join(us_counties,by = "fips") %>%
+  select(-date,-cases,-deaths,-new_cases) %>%
+  distinct()
+county_condition
+```
+
+```{r}
+csuccess <- county_condition %>%
+  filter(!is.na(end_date)) 
+csuccess
+```
+
+```{r}
+county_condition %>%
+  filter(state == "North Carolina")
+```
+
+```{r}
+write.csv(county_condition,"county_condition_0630.csv")
+# write.csv(csuccess,"success_county_0623.csv")
+```
+

@@ -1,0 +1,82 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+options(scipen = 999)
+```
+
+```{r}
+baidu_out_prov_allpre <- read_csv("data/baidu_out_prov_allpre.csv")
+baidu_out_prov_allpre
+```
+
+```{r}
+baidu_in_prov_allpre <- read_csv("data/baidu_in_prov_allpre.csv")
+baidu_in_prov_allpre
+```
+
+```{r}
+baidu_out_prov_allpre <- baidu_out_prov_allpre %>%
+  rename(prov = prov_out,predicted_flow_out = predicted_flow)
+baidu_out_prov_allpre
+```
+
+```{r}
+baidu_in_prov_allpre <- baidu_in_prov_allpre %>%
+  rename(prov = prov_in,predicted_flow_in = predicted_flow)
+baidu_in_prov_allpre
+```
+
+```{r}
+baidu_in_prov_allpre %>%
+  filter(prov == "Xizang")
+```
+
+```{r}
+baidu_prov_allpre <- baidu_in_prov_allpre %>%
+  full_join(baidu_out_prov_allpre,by = c("date","prov")) %>%
+  select(-X1.x,-X1.y)
+baidu_prov_allpre
+```
+
+```{r}
+baidu_prov_allpre_20 <- baidu_prov_allpre %>%
+  filter(date > as.Date("2019-12-31")) %>%
+  mutate(date_19 = date-354)
+baidu_prov_allpre_20
+```
+
+```{r}
+baidu_prov_allpre_19 <- baidu_prov_allpre %>%
+  filter(date <= as.Date("2019-12-31")) %>%
+  rename(date_19 = date,predicted_flow_in_19 = predicted_flow_in,predicted_flow_out_19 = predicted_flow_out)
+baidu_prov_allpre_19
+```
+
+```{r}
+baidu_prov_allpre_compare <- baidu_prov_allpre_20 %>%
+  left_join(baidu_prov_allpre_19,by = c("date_19","prov")) %>%
+  mutate(percent_change_out = 100*(predicted_flow_out-predicted_flow_out_19)/predicted_flow_out_19,percent_change_in = 100*(predicted_flow_in-predicted_flow_in_19)/predicted_flow_in_19)
+baidu_prov_allpre_compare
+```
+
+```{r}
+colors <- c("% change in" = "cadetblue2", "% change out" = "orangered1")
+
+baidu_prov_allpre_compare %>% 
+  filter(prov == "Xizang") %>%
+  ggplot(aes(x = date))+
+  geom_line(mapping = aes(y = percent_change_out,color = "% change out")) +
+  geom_line(mapping = aes(y = percent_change_in,color = "% change in")) + 
+  labs(y = "% change compared with 2019",title = "Xizang",color = "Line type") +
+  scale_color_manual(values = colors) + 
+  geom_vline(xintercept = as.Date("2020-01-23")) +
+  ylim(-100,100)
+```
+

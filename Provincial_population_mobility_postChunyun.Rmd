@@ -1,0 +1,160 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+```
+
+```{r}
+options(scipen = 999)
+```
+
+```{r}
+baidu_prov_out <- read_csv("Baidu Data Processing/baidu_prov_out.csv")
+baidu_prov_out
+```
+
+```{r}
+baidu_prov_out_post123 <- read_csv("Baidu Data Processing/baidu_provincial_out_post123.csv")
+baidu_prov_out_post123
+```
+
+```{r}
+sum_prov_out <- baidu_prov_out %>%
+  group_by(prov_out,date) %>%
+  summarise(overall_flow = sum(total_flow))
+sum_prov_out
+```
+
+```{r}
+prov_out_prop <- baidu_prov_out_post123 %>%
+  filter(date > as.Date("2020-01-09"),date < as.Date("2020-01-24")) %>%
+  inner_join(sum_prov_out,by = c("prov_out","date")) %>%
+  mutate(proportion = overall_flow/index) %>%
+  select(-X1)
+prov_out_prop
+```
+
+```{r}
+prov_prop_avg <- prov_out_prop %>%
+  group_by(prov_out) %>%
+  summarise(avgrate = mean(proportion))
+prov_prop_avg
+```
+
+```{r}
+prov_out_prop %>%
+  ggplot()+
+  geom_line(mapping = aes(x = date, y = proportion, color = prov_out))
+```
+
+```{r}
+baidu_prov_out_allpre <- baidu_prov_out_post123 %>%
+  full_join(prov_prop_avg, by = "prov_out") %>%
+  mutate(predicted_flow = index*avgrate) %>%
+  select(date,prov_out,predicted_flow)
+baidu_prov_out_allpre
+```
+```{r}
+write.csv(baidu_prov_out_allpre,"baidu_out_prov_allpre.csv")
+```
+
+```{r}
+baidu_prov_in_post123 <- read_csv("Baidu Data Processing/baidu_provincial_in_post123.csv")
+baidu_prov_in_post123
+```
+
+```{r}
+prov_prop_avgin <- prov_prop_avg %>%
+  rename(prov_in = prov_out)
+baidu_prov_in_allpre <- baidu_prov_in_post123 %>%
+  full_join(prov_prop_avgin, by = "prov_in") %>%
+  mutate(predicted_flow = index*avgrate) %>%
+  select(date,prov_in,predicted_flow)
+baidu_prov_in_allpre
+```
+
+```{r}
+write.csv(baidu_prov_in_allpre,"baidu_in_prov_allpre.csv")
+```
+
+
+```{r}
+baidu_prov_out_allpre %>%
+  filter(date > as.Date("2020-01-10")) %>%
+  ggplot() +
+  geom_line(mapping = aes(x = date, y = predicted_flow,color = prov_out))
+```
+
+```{r}
+baidu_prov_out_post123 %>%
+  filter(prov_out == "Hunan",date > as.Date("2020-01-10")) %>%
+  ggplot()+
+  geom_line(mapping = aes(x = date, y = index))
+```
+
+```{r}
+baidu_out_clean <- read_csv("Baidu Data Processing/baidu_out_clean.csv")
+baidu_out_clean <- mutate(baidu_out_clean, date = as.Date(Date,"%m/%d/%y"))
+baidu_out_clean
+```
+
+```{r}
+baidu_out_post123 <- baidu_out_clean %>%
+  filter(date > as.Date("2020-01-23"), date < as.Date("2020-03-16"))
+baidu_out_post123
+```
+
+```{r}
+baidu_out_post123_withprov <- read_csv("Baidu Data Processing/baidu_out_post123_withprov.csv")
+baidu_out_post123_withprov$`%`[is.na(baidu_out_post123_withprov$`%`)] <- 0
+baidu_out_post123_withprov
+```
+
+```{r}
+initial_percent_post123 <- baidu_out_post123_withprov %>%
+  select(City_out,City_in,`%`,date,prov_out,prov_in) %>%
+  filter(prov_out != prov_in) %>%
+  na.omit() %>%
+  group_by(date,prov_out,prov_in) %>%
+  summarise(total_percent = sum(`%`))
+initial_percent_post123
+```
+```{r}
+write.csv(initial_percent_post123,file = "Baidu Data Processing/initial_percent_post123.csv")
+```
+
+
+```{r}
+baidu_actual_percent_post123 <- read_csv("Baidu Data Processing/baidu_actual_percent_post123.csv")
+baidu_actual_percent_post123 <- baidu_actual_percent_post123 %>%
+  select(date,prov_out,prov_in,actual_percent,computed_flow)
+baidu_actual_percent_post123
+```
+
+```{r}
+baidu_prov_out <- read_csv("Baidu Data Processing/baidu_prov_out.csv")
+baidu_prov_out <- baidu_prov_out %>% 
+  mutate(computed_flow = total_flow) %>%
+  select(-X1,-total_flow)
+baidu_prov_out
+```
+
+```{r}
+baidu_prov_out_full <- baidu_prov_out %>%
+  full_join(baidu_actual_percent_post123 %>% select(-actual_percent),by = c("date","computed_flow","prov_out","prov_in"))
+baidu_prov_out_full
+```
+
+```{r}
+write.csv(baidu_prov_out_full,file = "Baidu Data Processing/baidu_prov_out_full.csv")
+```
+
+```{r}
+baidu_prov_out_full %>%
+  filter(prov_out == "Qinghai",prov_in == "Xizang") %>%
+  ggplot()+
+  geom_line(mapping = aes(x = date, y = computed_flow,color = prov_in))
+```
